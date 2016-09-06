@@ -3,7 +3,7 @@
         name:'Register',
         render(h){
             return (<div>
-                Register
+                Registerss
             </div>);
         }
     };

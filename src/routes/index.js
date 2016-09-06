@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import SignUp from '../component/sign-up.vue';
+import SignUp from '../component/login.vue';
 import Register from '../component/register.vue';
 
 Vue.use(Router);

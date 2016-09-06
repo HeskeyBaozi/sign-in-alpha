@@ -2,10 +2,11 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+    context: __dirname,
     entry: './src/main.js',
     output: {
-        path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist/',
+        path: path.resolve(__dirname, './public'),
+        publicPath: '/public',
         filename: 'build.js'
     },
     resolveLoader: {
@@ -53,4 +54,9 @@ if (process.env.NODE_ENV === 'production') {
             }
         })
     ])
+} else {
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin()
+    ]);
 }

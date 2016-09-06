@@ -9,7 +9,7 @@
 
 <script>
     import MyHeader from './component/header.vue';
-    import SignUp from './component/sign-up.vue';
+    import SignUp from './component/login.vue';
     import Register from './component/register.vue';
     import router from './routes'
 
