@@ -16,7 +16,8 @@
             </div>
             <div class="login-config">
                 <label class="remember-me">
-                    <input type="checkbox">记住我</input>
+                    <input type="checkbox" name="rememer-me"/>
+                    记住我
                 </label>
                 <a class="unable-login">无法登录?</a>
             </div>
@@ -24,22 +25,9 @@
     </div>
 </template>
 
-<style scoped>
-
-    .fade-enter-active,
-    .fade-leave-active {
-        transition: opacity 500ms ease-in-out;
-    }
-
-    .fade-enter,
-    .fade-leave-active{
-        opacity: 0;
-    }
-
-</style>
-
-
 <script type="text/jsx">
+
+
     export default {
         name: 'login',
         methods: {

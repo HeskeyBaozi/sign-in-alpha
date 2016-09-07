@@ -1,27 +1,40 @@
+'use strict';
+
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// Component
+/**
+ * Pages
+ */
 import Login from '../component/login.vue';
 import Register from '../component/register.vue';
-import Detail from '../component/detail.vue';
+import Detail from '../component/detail/detail.js';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     mode: 'hash',
     routes: [
         {
             path: '/login',
-            component: Login
+            component: Login,
         },
         {
             path: '/register',
             component: Register
         },
         {
-            path:'/detail',
+            path: '/detail',
             component: Detail
         }
     ]
 });
+
+router.beforeEach((route, redirect, next) => {
+    if (route.path === '/detail') {
+
+    }
+    next();
+});
+
+export default router;

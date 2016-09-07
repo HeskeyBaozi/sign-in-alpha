@@ -45,6 +45,10 @@ app.use(c(devMiddleware(compile), {
         colors: true
     }
 }));
+
+/**
+ * Hot Replace
+ */
 app.use(c(hotMiddleware(compile)));
 
 

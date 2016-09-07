@@ -1,14 +1,13 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
 import App from './App.vue';
 import router from './routes';
 import Resource from 'vue-resource';
+import store from './vuex/store.js';
 
 Vue.use(Resource);
 
-//Vue.use(VueRouter);
-
 new Vue({
     router,
-    render: h => h(App)
+    render: h => h(App),
+    store
 }).$mount('#app');
