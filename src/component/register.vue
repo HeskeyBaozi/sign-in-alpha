@@ -1,55 +1,95 @@
 <template>
     <div class="register">
-        <form action="/register">
-            <group-inputs :list="list"/>
-            <launchers :btns="btns"/>
-        </form>
+        <form>
+            <div class="group-inputs">
+                <div class="input-wrapper">
+                    <input type="text"
+                           name="username"
+                           placeholder="用户名"
+                           v-model="current.username"/>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text"
+                           name="phone"
+                           placeholder="手机号"
+                           v-model="current.phone"/>
+                </div>
+                <div class="input-wrapper">
+                    <input type="password"
+                           name="password"
+                           placeholder="密码"
+                           v-model="current.password"/>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text"
+                           name="repassword"
+                           placeholder="重复密码"
+                           v-model="current.repassword"/>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text"
+                           name="sid"
+                           placeholder="学号"
+                           v-model="current.sid"/>
+                </div>
+                <div class="input-wrapper">
+                    <input type="text"
+                           name="email"
+                           placeholder="Em@il"
+                           v-model="current.email"/>
+                </div>
 
+            </div>
+            <div class="command">
+                <button class="button"
+                        type="submit">
+                    Register
+                </button>
+                <button class="button"
+                        type="reset"
+                        @click.prevent="reset">
+                    Reset
+                </button>
+            </div>
+        </form>
     </div>
 </template>
 
-<script type="text/jsx">
+<style src="./common-css/page.css" scoped>
+</style>
 
-    /**
-     * groups-inputs
-     */
-    import groupInputs from './group-inputs/group-inputs';
-    import Li from './group-inputs/Li.class.js';
+<script>
+    class RegisterUser {
+        constructor() {
+            this.username = '';
+            this.password = '';
+            this.repassword = '';
+            this.phone = '';
+            this.sid = '';
+            this.email = '';
+        }
 
-    /**
-     * Launchers
-     */
-    import launchers from './launchers/launchers';
-    import Btn from './launchers/Btn.js';
-
+        reset() {
+            this.username = '';
+            this.password = '';
+            this.repassword = '';
+            this.phone = '';
+            this.sid = '';
+            this.email = '';
+        }
+    }
     export default {
         name: 'Register',
+        methods: {
+            reset(){
+                this.current.reset();
+            }
+        },
         data(){
             return {
-                list: [
-                    new Li('username', '用户名', 'text'),
-                    new Li('phone', '手机号', 'text'),
-                    new Li('password', '密码', 'password'),
-                    new Li('repeated-password', '重复密码', 'password'),
-                    new Li('sid', '学号', 'text'),
-                    new Li('email', 'Email', 'text'),
-                ],
-                btns: [
-                    new Btn('submit', 'Register', (e)=>{
-                        e.preventDefault();
-                        console.log(e.target);
-                    }),
-                    new Btn('reset', 'Reset', ()=>console.log('Reset'))
-                ]
+                current: new RegisterUser()
             };
-        },
-        components: {
-            groupInputs,
-            launchers
         }
     };
 </script>
 
-<style>
-
-</style>

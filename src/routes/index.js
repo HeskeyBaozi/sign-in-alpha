@@ -8,7 +8,7 @@ import Router from 'vue-router'
  */
 import Login from '../component/login.vue';
 import Register from '../component/register.vue';
-import Detail from '../component/detail/detail.js';
+import Detail from '../component/detail.vue';
 
 Vue.use(Router);
 

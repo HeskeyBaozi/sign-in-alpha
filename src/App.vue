@@ -2,7 +2,12 @@
     <div class="template-root">
 
         <!-- Header --->
-        <header>LOGO</header>
+        <header>
+            <h1>LOGO</h1>
+            <h2>
+                与师姐分享你的知识, 经验和见解 ♂
+            </h2>
+        </header>
 
         <!-- Main --->
         <main class="container-wrap">
@@ -12,7 +17,7 @@
                     <router-link to="/login">Login</router-link>
                     <router-link to="/detail">detail</router-link>
                     <span class="navs-slider-bars">
-                        </span>
+                    </span>
                 </div>
             </nav>
             <transition name="fade"
@@ -47,12 +52,14 @@
      */
     import Login from './component/login.vue';
     import Register from './component/register.vue';
+    import Detail from './component/detail.vue';
 
     export default {
         name: 'App',
         component: {
             Login,
-            Register
+            Register,
+            Detail
         }
     }
 </script>
@@ -61,10 +68,14 @@
 <style src="./component/common-css/animate.css">
     /* Animate.css */
 </style>
+
 <style src="normalize.css">
     /* Normalize.css */
 </style>
+
 <style>
+
+    /* Root Node Style */
     html {
         font-size: 62.5%;
         box-sizing: border-box;
@@ -72,7 +83,7 @@
 
     body {
         font-size: 1.5em;
-        font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+        font-family: Consolas, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
     }
 
     .template-root {
@@ -86,5 +97,27 @@
     .time {
         -webkit-animation-duration: 200ms;
         animation-duration: 200ms;
+    }
+
+    /* nav */
+    nav {
+        margin: 1em 0;
+    }
+
+    nav a {
+        display: inline-block;
+        padding: 1px 0;
+        font-size: 1.5em;
+        opacity: 0.5;
+        width: 6em;
+        height: 1em;
+        text-decoration: none;
+        color: #5e5e5e;
+        transition: all 200ms ease-out;
+    }
+
+    nav a:hover {
+        background-color: #464646;
+        color: #cccccc;
     }
 </style>

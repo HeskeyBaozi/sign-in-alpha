@@ -3,7 +3,7 @@ import RouterClass from 'koa-router';
 
 const router = new RouterClass();
 
-router.post('/login', async(ctx, next)=> {
+router.post('/login', async(ctx, next) => {
     if (typeof ctx.session.username === 'string') {
         ctx.body = {
             username: '已登录'
@@ -17,6 +17,11 @@ router.post('/login', async(ctx, next)=> {
     }
 
     await next();
+});
+
+router.post('/register', async(ctx, next) => {
+    console.log(ctx.request.body);
+    ctx.body = ctx.request.body;
 });
 
 export default router;

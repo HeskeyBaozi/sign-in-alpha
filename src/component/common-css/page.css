@@ -1,3 +1,4 @@
+/* The List Style */
 .group-inputs {
     border: 1px solid #cccccc;
     border-radius: 2px;
@@ -29,4 +30,29 @@
 
 .input-wrapper input:active {
     background-color: #ffffff;
+}
+
+/* The Button Style*/
+.command {
+    margin: 2em 0 0 0;
+}
+
+.button {
+    display: inline-block;
+    width: 10em;
+    padding: .3em .8em;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+    border-radius: .2em;
+    color: #5e5e5e;
+
+    font-size: 1em;
+    line-height: 1.5;
+
+    transition: color, background-color 200ms ease-out;
+}
+
+.button:hover {
+    background-color: #6e6e6e;
+    color: white;
 }
