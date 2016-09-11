@@ -1,7 +1,7 @@
 <template>
     <div class="detail">
         <ul>
-            <li v-for="(value, key) in msg">
+            <li v-for="(value, key) in currentUserInfo">
                 {{ key }} : {{ value }}
             </li>
         </ul>
@@ -12,17 +12,13 @@
 </style>
 
 <script>
+    import {currentUserInfo} from '../vuex/getters.js';
+
     export default {
         name: 'Detail',
-        created(){
-            this.msg = {
-                hello: 'word',
-                fuck: 'you'
-            }
-        },
-        data(){
-            return {
-                msg: 'hello vue'
+        vuex: {
+            getters: {
+                currentUserInfo
             }
         }
     }

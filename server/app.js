@@ -7,6 +7,7 @@ import c from 'koa-convert';
 import router from './router';
 import bodyParser from 'koa-bodyparser';
 import session from 'koa-session2';
+import MongoStore from 'koa-generic-session-mongo';
 
 
 /**
@@ -54,10 +55,10 @@ app.use(c(hotMiddleware(compile)));
 
 // session
 app.use(session({
-    key: 'koa-vue-ssid',
-    maxAge: 10 * 1000 * 60, // 10minutes
-    path: '/',
-    httpOnly: true
+    store: new MongoStore({
+        url: 'mongodb://localhost:27017/sign-in-alpha'
+    }),
+    maxAge: 1000 * 60 * 10
 }));
 
 

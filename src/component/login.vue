@@ -37,11 +37,26 @@
 </style>
 
 <script>
+    import {login} from '../vuex/actions.js';
+
     export default {
         name: 'Login',
         methods: {
             handleLogin(e){
-                console.log(e);
+                this.$http.post('./login', {
+                    username: this.username,
+                    password: this.password
+                }).then(res => res.json()).then(json => {
+                    console.log(json);
+                    if (json.type) {
+                        this.login(json.info);
+                    }
+                });
+            }
+        },
+        vuex: {
+            actions: {
+                login
             }
         },
         data(){

@@ -12,29 +12,45 @@ import Detail from '../component/detail.vue';
 
 Vue.use(Router);
 
+/**
+ * Vuex
+ */
+
+import store from '../vuex/store.js';
+
 const router = new Router({
     mode: 'hash',
     routes: [
         {
+            name: 'login',
             path: '/login',
             component: Login,
         },
         {
+            name: 'register',
             path: '/register',
             component: Register
         },
         {
+            name: 'detail',
             path: '/detail',
-            component: Detail
+            component: Detail,
+            meta: {
+                auth: true
+            }
         }
     ]
 });
 
 router.beforeEach((route, redirect, next) => {
-    if (route.path === '/detail') {
-
+    console.log('现在是否登录了', store.state.logged);
+    if (route.matched.some(m => m.meta.auth) && !store.state.logged) {
+        console.log('开始跳转');
+        redirect('/login');
+    } else {
+        next();
     }
-    next();
 });
+
 
 export default router;
