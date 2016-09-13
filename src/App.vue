@@ -43,13 +43,9 @@
 
 <script>
     /**
-     * Header
+     * Components
      */
     import MyHeader from './component/header.vue';
-
-    /**
-     * Pages
-     */
     import Login from './component/login.vue';
     import Register from './component/register.vue';
     import Detail from './component/detail.vue';

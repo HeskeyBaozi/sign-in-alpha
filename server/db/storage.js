@@ -1,31 +1,47 @@
 'use strict';
-
-import User from '../db/models/user.js';
 import mongoose from 'mongoose';
-mongoose.connect('mongodb://localhost:27017/sign-in-alpha');
 
-const init = async()=> {
+/**
+ * config Promise
+ * @type {Function}
+ */
+mongoose.Promise = global.Promise;
+const db = mongoose.createConnection('mongodb://localhost:27017/sign-in-alpha-v1');
 
-    let users = await User.find({}).exec();
-    if (users.length !== 0)
-        return;
+db.on('error', (e) => {
+    console.error('There are something wrong: ', e);
+});
 
-    await new User({
-        username: '小红',
-        email: 'xiaohong@bb.com',
-        password: 'xiaohong',
-        sid: '15330000',
-        phone: '13588990099'
-    }).save();
+db.once('open', () => {
+    console.log('succeed to connect!');
+});
 
-    await new User({
-        username: '小蓝',
-        email: 'xiaolan@bb.com',
-        password: 'xiaolan',
-        sid: '15330001',
-        phone: '13588990090'
-    }).save();
-    console.log('数据库初始化成功');
-};
+const UserSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    sid: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
+    }
+}, {
+    safe: true
+});
 
-export default init;
+const UserModel = db.model('User', UserSchema);
+
+export default UserModel;
+

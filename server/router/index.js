@@ -1,42 +1,66 @@
 'use strict';
-import RouterClass from 'koa-router';
-import init from '../db/storage.js';
+
+import UserModel from '../db/storage.js';
+import init from '../db/init.js';
+/**
+ * init MongoDB
+ */
 init();
 
-import User from '../db/models/user.js';
 
+/**
+ * RESTful api :)
+ */
+import RouterClass from 'koa-router';
 
-const router = new RouterClass();
+const router = new RouterClass({
+    prefix: '/v1'
+});
 
-router.post('/login', async(ctx, next) => {
-    let result = await User.find({
-        username: ctx.request.body.username
-    }).exec();
-    if (result.length) {
-        ctx.session.current = result[0];
-        ctx.body = {
-            type: true,
-            info: result[0]
-        };
-    } else {
-        ctx.body = {
-            type: false
-        };
+const M = {
+    SUCCESS: 'SUCCESS',
+    FAILURE: 'FAILURE'
+};
+
+class serverResponse {
+    constructor(msg, value) {
+        this.msg = msg || M.FAILURE;
+        this.value = value;
     }
+}
 
-});
-
-router.get('/detail', async(ctx, next) => {
-    if (typeof ctx.session.username === 'undefined') {
-        ctx.body = '对不起, 你没有登陆';
-    } else {
-        ctx.body = ctx.session;
+/**
+ * register or create a user
+ */
+router.post('/users', async(ctx, next) => {
+    let result = undefined;
+    try {
+        result = await new UserModel(ctx.request.body).save();
+    } catch (e) {
+        ctx.body = new serverResponse(M.FAILURE, e);
+        return next();
     }
+    ctx.body = new serverResponse(M.SUCCESS, result);
+    return next();
 });
 
-router.post('/register', async(ctx, next) => {
-    console.log(ctx.request.body);
-    ctx.body = ctx.request.body;
+/**
+ * query the detail of the user
+ */
+router.get('/users/:username', async(ctx, next) => {
+    let result = undefined;
+    try {
+        result = await UserModel.findOne({username: ctx.params.username}).exec();
+    } catch (e) {
+        ctx.body = new serverResponse(M.FAILURE, e);
+        return next();
+    }
+    if (result === null) {
+        ctx.body = new serverResponse(M.FAILURE, result);
+    } else
+        ctx.body = new serverResponse(M.SUCCESS, result);
+    return next();
 });
+
 
 export default router;

@@ -56,7 +56,7 @@ app.use(c(hotMiddleware(compile)));
 // session
 app.use(session({
     store: new MongoStore({
-        url: 'mongodb://localhost:27017/sign-in-alpha'
+        url: 'mongodb://localhost:27017/sign-in-alpha-v1'
     }),
     maxAge: 1000 * 60 * 10
 }));
@@ -67,6 +67,7 @@ app.use(serve(publicPath));
 
 // router
 app.use(router.routes());
+app.use(router.allowedMethods());
 
 
 module.exports = app;

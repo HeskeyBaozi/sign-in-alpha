@@ -50,6 +50,7 @@
                     console.log(json);
                     if (json.type) {
                         this.login(json.info);
+                        console.lo(json);
                     }
                 });
             }

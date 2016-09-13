@@ -4,8 +4,6 @@ import router from './routes';
 import Resource from 'vue-resource';
 import store from './vuex/store.js';
 
-Vue.use(Resource);
-
 new Vue({
     router,
     render: h => h(App),

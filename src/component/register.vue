@@ -42,7 +42,8 @@
             </div>
             <div class="command">
                 <button class="button"
-                        type="submit">
+                        type="submit"
+                        @click.prevent="register">
                     Register
                 </button>
                 <button class="button"
@@ -83,6 +84,14 @@
         methods: {
             reset(){
                 this.current.reset();
+            }
+        },
+        vuex: {
+            getters: {
+                getLog: ({state}) => state.logged
+            },
+            actions:{
+
             }
         },
         data(){
